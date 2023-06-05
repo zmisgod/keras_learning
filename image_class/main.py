@@ -1,6 +1,6 @@
 import tensorflow as tf
 from tensorflow import keras
-from tensorflow.keras import layers
+from keras import layers
 import os
 import matplotlib.pyplot as plt
 
@@ -25,10 +25,10 @@ def main():
     print("Deleted %d images" % num_skipped)
 
     image_size = (180, 180)
-    batch_size = 128
+    batch_size = 32
 
     train_ds, val_ds = tf.keras.utils.image_dataset_from_directory(
-        "PetImages",
+        "images",
         validation_split=0.2,
         subset="both",
         seed=1337,
@@ -62,20 +62,21 @@ def main():
     model = make_model(input_shape=image_size + (3,), num_classes=2)
     keras.utils.plot_model(model, show_shapes=True)
 
-    epochs = 25
+    epochs = 100
     callbacks = [
         keras.callbacks.ModelCheckpoint("save_at_{epoch}.keras"),
     ]
     model.compile(
         optimizer=keras.optimizers.Adam(1e-3),
         loss="binary_crossentropy",
-        metrics=["accuracy"],
+        metrics=["accuracy"]
     )
     model.fit(
         train_ds,
         epochs=epochs,
         callbacks=callbacks,
         validation_data=val_ds,
+        batch_size=1,
     )
     img = keras.utils.load_img("images/Cat/6779.jpg", target_size=image_size)
     img_array = keras.utils.img_to_array(img)
@@ -83,6 +84,7 @@ def main():
     predictions = model.predict(img_array)
     score = float(predictions[0])
     print(f"This image is {100 * (1 - score):.2f}% cat and {100 * score:.2f}% dog.")
+    model.save("finial.model")
 
 def make_model(input_shape, num_classes):
     inputs = keras.Input(shape=input_shape)
