@@ -62,7 +62,7 @@ def main():
     model = make_model(input_shape=image_size + (3,), num_classes=2)
     keras.utils.plot_model(model, show_shapes=True)
 
-    epochs = 100
+    epochs = 25
     callbacks = [
         keras.callbacks.ModelCheckpoint("save_at_{epoch}.keras"),
     ]
