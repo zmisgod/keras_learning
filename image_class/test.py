@@ -19,11 +19,13 @@ def test():
         doRec(arr[index], model)
 
 test()
-##1/1 [==============================] - 3s 3s/step
-##This image is 99.98% cat and 0.02% dog.
-##1/1 [==============================] - 0s 16ms/step
-##This image is 93.77% cat and 6.23% dog.
-##1/1 [==============================] - 0s 0s/step
-##This image is 10.44% cat and 89.56% dog.
-##1/1 [==============================] - 0s 16ms/step
-##This image is 0.00% cat and 100.00% dog.
+'''
+1/1 [==============================] - 3s 3s/step
+This image is 99.98% cat and 0.02% dog.
+1/1 [==============================] - 0s 16ms/step
+This image is 93.77% cat and 6.23% dog.
+1/1 [==============================] - 0s 0s/step
+This image is 10.44% cat and 89.56% dog.
+1/1 [==============================] - 0s 16ms/step
+This image is 0.00% cat and 100.00% dog.
+'''
