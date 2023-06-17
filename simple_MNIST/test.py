@@ -7,7 +7,7 @@ import cv2
 import matplotlib.pyplot as plt
 from keras.models import load_model
 
-def doRec(path, model,index):
+def doRec(path,model,index):
     #因为训练集的图片都是黑背景，白色字体，所以需要将输入的图片做相似处理
     image = cv2.imread(path, 0)
     image = cv2.resize(image,(28, 28))
@@ -18,7 +18,7 @@ def doRec(path, model,index):
             dst[i,j] = 255-image[i,j]
     
     image = dst
-    name = './test/new_%d.jpg' % index
+    name = './test/new_x_%d.jpg' % index
     cv2.imwrite(name, image)#保存图片
 
     image = np.array(image).astype(np.float32)
@@ -28,14 +28,21 @@ def doRec(path, model,index):
     predictions = np.argmax(predictions)
     print("result: ", path, predictions)
 
-
 def main():
-    model = load_model("final.model")
-    arr = ["./test/0.jpg","./test/1.jpg","./test/2.jpg",
-           "./test/3.jpg","./test/4.jpg","./test/5.jpg",
+    model = load_model("final-100-epochs.model")
+    arr = [
+        "./test/3.jpg",
+        "./test/0.jpg","./test/1.jpg","./test/2.jpg",
+          "./test/4.jpg","./test/5.jpg", "./test/9.jpg",
            "./test/6.jpg","./test/7.jpg","./test/8.jpg",
-           "./test/9.jpg","./test/13.jpg"
+           "./test/9.jpg","./test/13.jpg",
+           "./test/3.jpg","./test/7.jpg",
+           "./test/3.jpg", "./test/9.jpg", 
+           "./../opencv_research/images/new_i_1.jpg", 
+           "./../opencv_research/images/new_i_2.jpg",
+           "./../opencv_research/images/new_i_3.jpg",
         ]
+    # arr = ["./test/3.jpg", "./test/9.jpg", "./../opencv_research/images/new_i_1.jpg", "./../opencv_research/images/new_i_2.jpg","./../opencv_research/images/new_i_3.jpg",]
     for index in range(len(arr)):
         doRec(arr[index],model,index)
 

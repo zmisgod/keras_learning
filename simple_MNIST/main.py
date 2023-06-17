@@ -41,7 +41,7 @@ def main():
     model.summary()
 
     batch_size = 128
-    epochs = 15
+    epochs = 100
 
     model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
 
@@ -50,6 +50,6 @@ def main():
     score = model.evaluate(x_test, y_test, verbose=0)
     print("Test loss:", score[0])
     print("Test accuracy:", score[1])
-    model.save("final.model")
+    model.save("final-100-epochs.model")
 
 main()
