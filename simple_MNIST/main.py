@@ -1,6 +1,6 @@
 import numpy as np
 from tensorflow import keras
-from tensorflow.python.keras import layers
+from keras import layers
 
 def main():
     # Model / data parameters
@@ -40,16 +40,12 @@ def main():
 
     model.summary()
 
-    batch_size = 128
+    batch_size = 512
     epochs = 100
 
     model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
 
     model.fit(x_train, y_train, batch_size=batch_size, epochs=epochs, validation_split=0.1)
-
-    score = model.evaluate(x_test, y_test, verbose=0)
-    print("Test loss:", score[0])
-    print("Test accuracy:", score[1])
-    model.save("final-100-epochs.model")
+    model.save("final-%d-epochs.model" % epochs, save_format="h5")
 
 main()

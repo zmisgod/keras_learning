@@ -58,19 +58,21 @@ def main():
         cv2.imwrite(name, rest)#保存图片
         img_a = Image.open(name)
         # 计算原始图片的缩放比例
+        size = 24
+        bgSize = 28
         width, height = img_a.size
-        ratio = min(26/width, 26/height)
+        ratio = min(size/width, size/height)
         new_size = (int(width*ratio), int(height*ratio))
 
-        # 缩放原始图片，使它在 26x26 的图片上面保持比例不变
+        # 缩放原始图片，使它在 28x28 的图片上面保持比例不变
         img_a = img_a.resize(new_size)
 
         # 创建空白的背景图片
-        img_bg = Image.new('RGB', (26, 26), color='white')
+        img_bg = Image.new('RGB', (bgSize, bgSize), color='white')
 
         # 计算图片放置位置
-        x = (26 - new_size[0]) // 2
-        y = (26 - new_size[1]) // 2
+        x = (bgSize - new_size[0]) // 2
+        y = (bgSize - new_size[1]) // 2
 
         # 在背景图片上粘贴原始图片
         img_bg.paste(img_a, (x, y))
