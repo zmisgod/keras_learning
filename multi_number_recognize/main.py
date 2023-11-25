@@ -16,7 +16,7 @@ def main():
                 optimizer=keras.optimizers.Adadelta(),
                 metrics=['accuracy'])
 
-    image = cv2.imread("./images/139.jpg")
+    image = cv2.imread("./images/test.jpg")
     imgray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     gray_gaussian = cv2.GaussianBlur(imgray, (5, 5), 0)
     ret, thresh = cv2.threshold(gray_gaussian, 0,255,cv2.THRESH_BINARY + cv2.THRESH_OTSU)#使用Otsu的二值化算法进行图像二值化处理
@@ -27,7 +27,6 @@ def main():
     saveBox = []
     areaMap = {}
 
-    nowStart = 0
     imgShowQueue = {}
     imgShowArr = {}
 
